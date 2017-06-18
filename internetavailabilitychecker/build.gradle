@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/AggarwalAnkit/InternetAvailabilityChecker'
     gitUrl = 'https://github.com/AggarwalAnkit/InternetAvailabilityChecker.git'
 
-    libraryVersion = '1.0'
+    libraryVersion = '1.0.1'
 
     developerId = 'ankit'
     developerName = 'Ankit Aggarwal'
@@ -25,14 +25,14 @@ ext {
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion "25.0.3"
 
     defaultConfig {
         minSdkVersion 3
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion 26
+        versionCode 2
+        versionName "1.0.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
