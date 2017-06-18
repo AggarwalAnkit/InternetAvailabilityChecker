@@ -180,7 +180,7 @@ public final class InternetAvailabilityChecker implements NetworkChangeReceiver.
             mNetworkChangeReceiver.removeNetworkChangeListener();
         }
         mNetworkChangeReceiver = null;
-        sInstance = null;
+        mIsNetworkChangeRegistered = false;
         mCheckConnectivityCallback = null;
     }
 
