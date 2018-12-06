@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.treebo.internetconnectivitylistener.MainActivity">
+    tools:context="com.treebo.internetconnectivitylistener.Main2Activity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Activity 1" />
+        app:title="Activity 2" />
 
     <TextView
         android:id="@+id/tv_status"
@@ -23,11 +23,4 @@
         android:layout_marginBottom="8dp"
         android:gravity="center"
         tools:text="test" />
-
-    <Button
-        android:id="@+id/btb_open_next_activity"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:text="Open Activity 2"
-        android:layout_height="wrap_content" />
 </LinearLayout>

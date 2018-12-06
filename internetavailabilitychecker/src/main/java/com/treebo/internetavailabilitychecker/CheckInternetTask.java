@@ -46,7 +46,7 @@ class CheckInternetTask extends AsyncTask<Void, Void, Boolean> {
             //parse url. if url is not parsed properly then return
             URL url;
             try {
-                url = new URL("http://clients3.google.com/generate_204");
+                url = new URL("https://clients3.google.com/generate_204");
             } catch (MalformedURLException e) {
                 e.printStackTrace();
                 return false;
