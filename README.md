@@ -33,5 +33,4 @@ It keeps a weakreference to the subscriber and clears the references whenever su
     mInternetAvailabilityChecker.removeInternetConnectivityChangeListener(this);
     ```
     
-# Medium Link
-`https://medium.com/@ankit_aggarwal/check-active-internet-connection-on-android-device-3138ad81932d`
+# [Medium Link](https://medium.com/@ankit_aggarwal/check-active-internet-connection-on-android-device-3138ad81932d)
