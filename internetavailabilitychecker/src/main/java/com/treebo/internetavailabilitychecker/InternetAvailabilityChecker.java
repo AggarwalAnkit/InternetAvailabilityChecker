@@ -80,8 +80,12 @@ public final class InternetAvailabilityChecker implements NetworkChangeReceiver.
         return sInstance;
     }
 
+    public boolean getCurrentInternetAvailabilityStatus() {
+        return mIsInternetConnected;
+    }
+
     /**
-     * Sdd InternetConnectivityListener only if it's not added. It keeps a weak reference to the listener.
+     * Add InternetConnectivityListener only if it's not added. It keeps a weak reference to the listener.
      * So user should have a strong reference to that listener otherwise that will be garbage collected
      */
     public void addInternetConnectivityListener(InternetConnectivityListener internetConnectivityListener) {
@@ -194,12 +198,16 @@ public final class InternetAvailabilityChecker implements NetworkChangeReceiver.
                 @Override
                 public void onTaskFinished(Boolean isInternetAvailable) {
                     mCheckConnectivityCallback = null;
-                    publishInternetAvailabilityStatus(isInternetAvailable);
+                    if (mIsInternetConnected != isInternetAvailable) {
+                        publishInternetAvailabilityStatus(isInternetAvailable);
+                    }
                 }
             };
             new CheckInternetTask(mCheckConnectivityCallback).execute();
         } else {
-            publishInternetAvailabilityStatus(false);
+            if (mIsInternetConnected) {
+                publishInternetAvailabilityStatus(false);
+            }
         }
     }
 
