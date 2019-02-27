@@ -64,6 +64,7 @@ class CheckInternetTask extends AsyncTask<Void, Void, Boolean> {
             urlConnection.setRequestProperty("User-Agent", "Android");
             urlConnection.setRequestProperty("Connection", "close");
             urlConnection.setConnectTimeout(1500);
+            urlConnection.setReadTimeout(1500);
             urlConnection.connect();
             return urlConnection.getResponseCode() == 204 && urlConnection.getContentLength() == 0;
         } catch (IOException e) {

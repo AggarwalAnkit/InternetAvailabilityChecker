@@ -41,6 +41,7 @@ public final class InternetAvailabilityChecker implements NetworkChangeReceiver.
     private NetworkChangeReceiver mNetworkChangeReceiver;
     private boolean mIsNetworkChangeRegistered = false;
     private boolean mIsInternetConnected = false;
+    private boolean isInitialConnectivityStatusKnow = false; // this variable is to track if initial connectivity status has been calculated or not
 
     private TaskFinished<Boolean> mCheckConnectivityCallback;
 
@@ -95,6 +96,7 @@ public final class InternetAvailabilityChecker implements NetworkChangeReceiver.
         mInternetConnectivityListenersWeakReferences.add(new WeakReference<>(internetConnectivityListener));
         if (mInternetConnectivityListenersWeakReferences.size() == 1) {
             registerNetworkChangeReceiver();
+            isInitialConnectivityStatusKnow = false;
             return;
         }
         publishInternetAvailabilityStatus(mIsInternetConnected);
@@ -198,15 +200,17 @@ public final class InternetAvailabilityChecker implements NetworkChangeReceiver.
                 @Override
                 public void onTaskFinished(Boolean isInternetAvailable) {
                     mCheckConnectivityCallback = null;
-                    if (mIsInternetConnected != isInternetAvailable) {
+                    if (!isInitialConnectivityStatusKnow || (mIsInternetConnected != isInternetAvailable)) {
                         publishInternetAvailabilityStatus(isInternetAvailable);
+                        isInitialConnectivityStatusKnow = true;
                     }
                 }
             };
             new CheckInternetTask(mCheckConnectivityCallback).execute();
         } else {
-            if (mIsInternetConnected) {
+            if (!isInitialConnectivityStatusKnow || mIsInternetConnected) {
                 publishInternetAvailabilityStatus(false);
+                isInitialConnectivityStatusKnow = true;
             }
         }
     }
