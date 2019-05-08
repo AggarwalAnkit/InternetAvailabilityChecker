@@ -20,6 +20,7 @@
 package com.treebo.internetavailabilitychecker;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -32,7 +33,8 @@ import java.net.URL;
  */
 
 //this async task tries to create a socket connection with google.com. If succeeds then return true otherwise false
-class CheckInternetTask extends AsyncTask<Void, Void, Boolean> {
+class CheckInternetTask extends AsyncTask<String, Void, Boolean> {
+
 
     private WeakReference<TaskFinished<Boolean>> mCallbackWeakReference;
 
@@ -40,13 +42,14 @@ class CheckInternetTask extends AsyncTask<Void, Void, Boolean> {
         mCallbackWeakReference = new WeakReference<>(callback);
     }
 
+
     @Override
-    protected Boolean doInBackground(Void... params) {
+    protected Boolean doInBackground(String... strings) {
         try {
             //parse url. if url is not parsed properly then return
             URL url;
             try {
-                url = new URL("https://clients3.google.com/generate_204");
+                url = new URL(strings[0]);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
                 return false;
@@ -71,6 +74,7 @@ class CheckInternetTask extends AsyncTask<Void, Void, Boolean> {
             return false;
         }
     }
+
 
     @Override
     protected void onPostExecute(Boolean isInternetAvailable) {

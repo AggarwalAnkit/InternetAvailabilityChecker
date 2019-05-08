@@ -25,9 +25,14 @@ Also it does lazy registration of receiver; i.e. it registers receiver whenever 
 4. Get instance of InternetAvailabilityChecker and Add listener whenever you want to start listening to connectivity changes (e.g. in activity’s `onCreate()` function).
 It keeps a weakreference to the subscriber and clears the references whenever subscriber gets destroyed (when there is no more strong reference referencing it).
     ```
-    mInternetAvailabilityChecker = InternetAvailabilityChecker.getInstance();
+    mInternetAvailabilityChecker = InternetAvailabilityChecker.getInstance(); // by default pinged url will be https://clients3.google.com/generate_204
     mInternetAvailabilityChecker.addInternetConnectivityListener(this);
     ```
+    if you need to change it for some reason ( local network , google baned , ping on a specific server , etc ... )  you  can use the bellow method :
+    ```
+     mInternetAvailabilityChecker = InternetAvailabilityChecker.getInstance("HTTP://YOURURL");
+     ```
+
 5. Remove listener whenever you are done (e.g. in activity’s `onDestroy()`, fragment’s `onDetach()` or service’s `onDestroy()`).
     ```
     mInternetAvailabilityChecker.removeInternetConnectivityChangeListener(this);
