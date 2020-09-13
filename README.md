@@ -5,7 +5,7 @@ this project checks if active internet is present or not on device. Connecting t
 To use the library follow the following steps:
 1. Add the dependency as follows:
    ```
-   compile 'com.treebo:internetavailabilitychecker:$library_version'
+   implementation 'com.treebo:internetavailabilitychecker:1.0.4'
    ```
 2. Initialise it in application’s `onCreate()` function. This is necessary step before starting using the library because it needs context to register connectivity broadcast receiver.
 It stores only weakreference to the context, so no need to worry about memory leaks.
