@@ -30,7 +30,11 @@ public class MainActivity extends AppCompatActivity implements InternetConnectiv
             }
         });
 
-        mInternetAvailabilityChecker = InternetAvailabilityChecker.getInstance();
+        mInternetAvailabilityChecker = InternetAvailabilityChecker.getInstance();// by default pinged url will be https://clients3.google.com/generate_204
+        // if you need to change it for some reason ( local network , google baned , ping on a specific server , etc ... )
+        // you  can use the bellow method :
+       // mInternetAvailabilityChecker = InternetAvailabilityChecker.getInstance("HTTP://YOURURL");
+
         mInternetAvailabilityChecker.addInternetConnectivityListener(this);
     }
 

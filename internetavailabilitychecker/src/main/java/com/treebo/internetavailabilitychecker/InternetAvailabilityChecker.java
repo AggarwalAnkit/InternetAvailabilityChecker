@@ -35,7 +35,7 @@ public final class InternetAvailabilityChecker implements NetworkChangeReceiver.
 
     private static final Object LOCK = new Object();
     private static volatile InternetAvailabilityChecker sInstance;
-
+    private String serverUrl = "https://clients3.google.com/generate_204";
     private WeakReference<Context> mContextWeakReference;
     private List<WeakReference<InternetConnectivityListener>> mInternetConnectivityListenersWeakReferences;
     private NetworkChangeReceiver mNetworkChangeReceiver;
@@ -78,6 +78,16 @@ public final class InternetAvailabilityChecker implements NetworkChangeReceiver.
         if (sInstance == null) {
             throw new IllegalStateException("call init(Context) in your application class before calling getInstance()");
         }
+        return sInstance;
+    }
+
+
+    public static InternetAvailabilityChecker getInstance(String url) {
+
+        if (sInstance == null) {
+            throw new IllegalStateException("call init(Context) in your application class before calling getInstance()");
+        }
+        sInstance.serverUrl = url;
         return sInstance;
     }
 
@@ -206,7 +216,7 @@ public final class InternetAvailabilityChecker implements NetworkChangeReceiver.
                     }
                 }
             };
-            new CheckInternetTask(mCheckConnectivityCallback).execute();
+            new CheckInternetTask(mCheckConnectivityCallback).execute(serverUrl);
         } else {
             if (!isInitialConnectivityStatusKnow || mIsInternetConnected) {
                 publishInternetAvailabilityStatus(false);
